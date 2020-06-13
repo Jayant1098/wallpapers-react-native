@@ -32,10 +32,17 @@ export default function App() {
   const imageFocoused = useRef(isImageFocused);
 
   const animationScaleImage = { transform: [{ scale: scale }] };
-  const animationControls = scale.interpolate({
-    inputRange: [0.9, 1],
-    outputRange: [0, -80],
-  });
+  // const animationControls = scale.interpolate({
+  //   inputRange: [0.9, 1],
+  //   outputRange: [0, -80],
+  // });
+  const animationControls = {transform: [{
+    translateY: scale.interpolate({
+      inputRange: [0.9, 1],
+      outputRange: [-80, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+    }),
+  }]}
+
 
   const { height, width } = Dimensions.get("window");
 
@@ -69,11 +76,13 @@ export default function App() {
       Animated.spring(scale, {
         toValue: 0.9,
         speed: 20,
+        useNativeDriver: true
       }).start();
     } else {
       Animated.spring(scale, {
         toValue: 1,
         speed: 20,
+        useNativeDriver: true
       }).start();
     }
     // console.log('Change is IMage focuoses', imageFocoused, isImageFocused, scale,newScale)
@@ -127,17 +136,16 @@ export default function App() {
           </Animated.View>
         </TouchableWithoutFeedback>
         <Animated.View
-          style={{
+          style={[{
             position: "absolute",
             left: 0,
             right: 0,
-            bottom: animationControls,
+            bottom: -80,
             height: 80,
             backgroundColor: "black",
             flexDirection: "row",
             justifyContent: "space-around",
-          }}
-        >
+          },animationControls]}>
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
