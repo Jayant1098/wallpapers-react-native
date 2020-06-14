@@ -126,6 +126,20 @@ export default function App() {
   function renderItem({ item }) {
     return (
       <View>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "black",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ActivityIndicator size="large" color="grey" />
+        </View>
         <TouchableWithoutFeedback onPress={() => showControls(item)}>
           <Animated.View style={[{ height, width }, animationScaleImage]}>
             <Image
@@ -136,16 +150,20 @@ export default function App() {
           </Animated.View>
         </TouchableWithoutFeedback>
         <Animated.View
-          style={[{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: -80,
-            height: 80,
-            backgroundColor: "black",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          },animationControls]}>
+          style={[
+            {
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: -80,
+              height: 80,
+              backgroundColor: "black",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            },
+            animationControls,
+          ]}
+        >
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
